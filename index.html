@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Orange — Strona główna</title>
 <style>
+/* ===== DESIGN TOKENS — Figma: fCjsqSTUlP1jfWpSZsdfc7 / node 6868-48581 ===== */
 :root {
   --bg-bold-100:      #000000;
   --bg-bold-90:       #232323;
@@ -32,6 +33,7 @@
 
   --rounded-small:    4px;
   --rounded-standard: 8px;
+  --rounded-big:      16px;
   --rounded-full:     999px;
 
   --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -44,6 +46,7 @@
   --fs-xl: 24px;   --lh-xl: 28px;
   --fs-2xl: 30px;  --lh-2xl: 34px;
   --fs-3xl: 34px;  --lh-3xl: 38px;
+  --fs-4xl: 40px;  --lh-4xl: 44px;
   --fs-5xl: 50px;  --lh-5xl: 54px;
 
   --sp1: 4px; --sp1-5: 6px; --sp2: 8px; --sp3: 12px; --sp4: 16px;
@@ -64,26 +67,15 @@ body {
 img { display: block; max-width: none; }
 a { text-decoration: none; color: inherit; }
 button { font-family: inherit; border: none; background: none; cursor: pointer; }
+p { white-space: pre-wrap; }
 
 .page { display: flex; flex-direction: column; align-items: center; width: 100%; }
 
-/* ===================== MENU ===================== */
+/* ===================== MENU (shared with lp-tv.html) ===================== */
 .menu { position: relative; width: 1440px; z-index: 2; }
-.menu-upper {
-  background: var(--bg-bold-80);
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 100px;
-}
+.menu-upper { background: var(--bg-bold-80); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 100px; }
 .markets { display: flex; align-items: center; height: 50px; }
-.market {
-  height: 50px; display: flex; align-items: center; justify-content: center;
-  padding: 8px 20px; background: var(--bg-bold-80);
-  font-weight: 700; font-size: var(--fs-xs); line-height: var(--lh-xs);
-  color: var(--text-light); white-space: nowrap;
-}
+.market { height: 50px; display: flex; align-items: center; justify-content: center; padding: 8px 20px; background: var(--bg-bold-80); font-weight: 700; font-size: var(--fs-xs); line-height: var(--lh-xs); color: var(--text-light); white-space: nowrap; }
 .market.active { background: var(--bg-bold-100); color: var(--text-active); }
 .menu-upper-right { display: flex; align-items: center; height: 100%; }
 .menu-item { display: flex; gap: 6px; align-items: center; height: 50px; padding: 8px; background: var(--bg-bold-80); }
@@ -92,196 +84,197 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
 .btn-login-wrap { height: 50px; width: 149px; display: flex; align-items: center; justify-content: flex-end; padding: 8px; background: var(--bg-bold-80); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--rounded-small); font-weight: 700; font-size: var(--fs-sm); line-height: var(--lh-sm); cursor: pointer; white-space: nowrap; }
 .btn-primary-small { background: var(--bg-brand); color: var(--text-light); padding: 6px 16px; height: 34px; }
+.btn-primary { background: var(--bg-brand); color: var(--text-light); padding: 12px 24px; border-radius: 8px; }
 
-.menu-lower {
-  background: var(--bg-bold-100); width: 1440px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px 0 24px; position: relative; z-index: 1;
-}
+.menu-lower { background: var(--bg-bold-100); width: 1440px; display: flex; align-items: center; justify-content: space-between; padding: 0 100px; position: relative; z-index: 1; }
 .services { display: flex; align-items: center; }
-.logo-market { display: flex; align-items: center; height: 100%; padding-right: 20px; }
+.logo-market { display: flex; align-items: center; height: 100%; padding-right: 16px; }
 .logo-market img { width: 40px; height: 40px; }
-.service { display: flex; align-items: center; gap: 6px; height: 80px; padding: 0 16px; position: relative; }
-.service .badge {
-  position: absolute; top: 14px; left: 4px;
-  background: #1e90d8; color: #fff; font-size: 10px; font-weight: 700;
-  padding: 2px 6px; border-radius: 3px; white-space: nowrap;
+.service { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; justify-content: flex-end; min-height: 82px; padding: 16px; }
+.uslugi { display: flex; gap: 2px; align-items: center; height: 20px; }
+.uslugi span { font-weight: 700; font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--text-light); white-space: nowrap; }
+.uslugi img { width: 20px; height: 20px; }
+.right-side { display: flex; align-items: center; justify-content: flex-end; height: 100%; border-left: 1px solid var(--bg-bold-80); border-right: 1px solid var(--bg-bold-80); }
+.custom-item { display: flex; flex-direction: column; gap: 4px; align-items: center; justify-content: center; height: 80px; padding: 0 20px; }
+.custom-item .icon { width: 20px; height: 20px; color: var(--text-light); }
+.custom-item img.cart { width: 30px; height: 24px; }
+.custom-item span { font-weight: 700; font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--text-light); text-align: center; white-space: nowrap; }
+
+/* ===================== SG HEADER (hero) ===================== */
+.sg-header {
+  width: 1440px; background: var(--bg-bold-100);
+  border-top: 2px solid var(--border-bold);
+  display: flex; gap: 40px; align-items: flex-start; justify-content: center;
+  padding: 12px 104px; position: relative;
 }
-.service .badge.badge-new { background: var(--bg-brand); }
-.service span { font-weight: 700; font-size: var(--fs-base); color: var(--text-light); white-space: nowrap; }
-.service img { width: 20px; height: 20px; }
-.menu-right { display: flex; align-items: center; height: 80px; }
-.menu-search { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px; }
-.menu-search span { font-weight: 700; font-size: var(--fs-sm); color: var(--text-light); }
+.shortcuts-box { width: 272px; display: flex; flex-direction: column; }
+.shortcuts-box h3 { color: var(--text-light); font-weight: 700; font-size: var(--fs-lg); line-height: var(--lh-lg); padding-bottom: 6px; }
+.shortcut-tiles { display: flex; flex-direction: column; gap: 8px; }
+.shortcut-btn { display: flex; gap: 16px; align-items: center; background: var(--bg-bold-90); border-radius: var(--rounded-standard); padding: 20px 12px; }
+.shortcut-btn .icon { width: 24px; height: 24px; flex-shrink: 0; }
+.shortcut-btn span { color: var(--text-light); font-weight: 700; font-size: var(--fs-sm); line-height: var(--lh-sm); white-space: nowrap; }
 
-/* ===================== NOTICE STRIP ===================== */
-.notice-strip { width: 1440px; background: var(--bg-ghost); padding: 8px 100px; text-align: center; font-weight: 500; font-size: var(--fs-sm); color: var(--text-bold-default); }
-.notice-strip a { font-weight: 700; text-decoration: underline; color: var(--text-bold-default); }
-
-/* ===================== HERO ===================== */
-.hero-home { width: 1440px; background: var(--bg-bold-100); display: flex; gap: 24px; padding: 24px 100px; }
-.hero-list { width: 300px; display: flex; flex-direction: column; gap: 8px; }
-.hero-list h3 { color: var(--text-light); font-weight: 700; font-size: var(--fs-base); padding-bottom: 8px; }
-.hero-list-item {
-  display: flex; align-items: center; gap: 12px;
-  background: var(--bg-bold-90); border-radius: var(--rounded-standard);
-  padding: 14px 16px; color: var(--text-light); font-weight: 700; font-size: var(--fs-sm);
-}
-.hero-list-item .icon { width: 22px; height: 22px; flex-shrink: 0; }
-
+.hero-item-holder { flex: 1; min-width: 0; position: relative; }
 .hero-banner {
-  flex: 1; position: relative; border-radius: var(--rounded-standard); overflow: hidden;
-  background: linear-gradient(120deg, #1a1a1a 0%, #3a2a2a 55%, #7a1f1f 100%);
-  min-height: 300px; display: flex; align-items: center; padding: 40px 48px;
+  background: var(--bg-bold-90); border: 2px solid var(--border-bold); border-radius: var(--rounded-standard);
+  display: flex; align-items: center; justify-content: center; gap: 16px; overflow: hidden; padding: 1px;
 }
-.hero-banner .wordmark { position: absolute; top: 40px; left: 48px; font-size: 40px; font-weight: 900; color: rgba(255,255,255,0.9); letter-spacing: -1px; }
-.hero-banner-copy { position: relative; z-index: 1; max-width: 420px; margin-top: 60px; }
-.hero-banner-copy .tag { display: inline-block; background: var(--bg-brand); color: #fff; font-weight: 700; font-size: var(--fs-xs); padding: 2px 8px; border-radius: 3px; margin-bottom: 8px; }
-.hero-banner-copy h2 { color: var(--text-light); font-weight: 700; font-size: var(--fs-2xl); line-height: var(--lh-2xl); padding-bottom: 16px; }
+.hero-visual { position: relative; width: 354px; height: 372px; flex-shrink: 0; overflow: hidden; }
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.hero-visual .top-label {
+  position: absolute; top: 12px; left: 24px; color: var(--text-light); font-weight: 700;
+  font-size: var(--fs-3xl); line-height: var(--lh-3xl); white-space: pre-line;
+}
+.hero-visual .tak-o {
+  position: absolute; right: 24px; bottom: 20px; color: #f16e00; font-weight: 700;
+  font-size: 51px; letter-spacing: -2px;
+}
+.hero-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 20px; padding-right: 24px; }
+.hero-content h2 { color: var(--text-light); font-weight: 700; font-size: var(--fs-3xl); line-height: var(--lh-3xl); }
+.hero-content .body { color: var(--text-light); font-weight: 700; font-size: var(--fs-md); line-height: var(--lh-md); padding-top: 12px; }
+
 .hero-arrow {
-  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-  width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.15);
-  display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px;
+  position: absolute; top: 195px; width: 46px; height: 46px; border-radius: var(--rounded-standard);
+  background: var(--bg-ghost); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--text-bold-default);
 }
-.hero-dots { position: absolute; bottom: 16px; left: 48px; display: flex; gap: 6px; }
-.hero-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); }
-.hero-dots span.active { background: #fff; }
+.hero-arrow.left { left: -23px; }
+.hero-arrow.right { right: -23px; }
+.hero-pagination { display: flex; gap: 8px; width: 100%; padding-top: 8px; }
+.hero-pagination span { flex: 1; height: 4px; border-radius: 8px; background: var(--bg-bold-80); }
+.hero-pagination span.active { background: var(--bg-brand); }
 
-/* ===================== KUP ONLINE ===================== */
-.kup-online { width: 1440px; background: var(--bg-container); padding: 40px 100px; display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.kup-online h2 { font-weight: 700; font-size: var(--fs-2xl); color: var(--text-bold-default); }
-.kup-cards { display: flex; gap: 16px; width: 100%; }
-.kup-card {
-  flex: 1; border-radius: var(--rounded-standard); overflow: hidden; position: relative;
-  min-height: 240px; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px;
-  color: #fff;
+.flag-badge {
+  position: absolute; top: -2px; right: 0; width: 75px; height: 52px;
+  background: var(--bg-bold-90); box-shadow: var(--shadow-elevated);
+  display: flex; align-items: center; justify-content: center;
 }
-.kup-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%); }
-.kup-card.c1 { background: linear-gradient(135deg, #2b4b3c, #12241c); }
-.kup-card.c2 { background: linear-gradient(135deg, #244a3a, #0e2018); }
-.kup-card.c3 { background: linear-gradient(135deg, #7a5a2a, #2a1c0c); }
-.kup-card.c4 { background: linear-gradient(135deg, #a5401f, #2c0f06); }
-.kup-card-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 6px; }
-.kup-card .price { color: var(--text-active); font-weight: 700; }
-.kup-card h3 { font-weight: 700; font-size: var(--fs-lg); line-height: var(--lh-lg); }
-.kup-card a.cta { font-weight: 700; font-size: var(--fs-sm); text-decoration: underline; }
-.kup-card .fine { font-size: 10px; opacity: 0.7; }
+.flag-badge img { width: 44px; height: 28px; }
 
-/* ===================== FIBER FORM ===================== */
-.fiber-form-section { width: 1440px; background: var(--bg-container); padding: 40px 100px; display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.fiber-form-section h2 { font-weight: 700; font-size: var(--fs-xl); color: var(--text-bold-default); text-align: center; }
-.fiber-form { display: flex; gap: 8px; align-items: center; }
-.fiber-form select, .fiber-form input {
-  border: 2px solid var(--border-input); border-radius: var(--rounded-small);
-  padding: 12px 16px; font-family: var(--font); font-size: var(--fs-sm); color: var(--text-bold-default);
-  width: 220px;
+/* ===================== OFFER TEASERS ===================== */
+.offer-teasers-wrap { width: 1440px; background: var(--bg-light-100); padding: 16px 104px; }
+.offer-teasers {
+  background: var(--bg-bold-100); border-radius: var(--rounded-standard); padding: 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 0;
 }
-.fiber-form-check { display: flex; align-items: center; gap: 8px; font-size: var(--fs-sm); color: var(--text-bold-default); }
-.fiber-form-note { font-size: var(--fs-xs); color: var(--text-bold-light); }
-.fiber-form-note a { text-decoration: underline; color: var(--text-bold-light); }
+.offer-teasers h2 { color: var(--text-light); font-weight: 700; font-size: var(--fs-2xl); line-height: var(--lh-2xl); text-align: center; }
+.offer-teasers .sub { color: var(--text-bold-light-inv); font-weight: 500; font-size: var(--fs-base); line-height: var(--lh-base); text-align: center; padding-bottom: 24px; }
+.offer-cards { display: flex; gap: 8px; width: 100%; justify-content: center; }
+.offer-card {
+  flex: 1; min-width: 0; max-width: 390px; height: 256px; border-radius: var(--rounded-standard); overflow: hidden;
+  background: var(--bg-bold-90); position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px;
+}
+.offer-card img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+.offer-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(35,35,35,0) 30%, rgba(35,35,35,0.9) 100%); }
+.offer-card-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 12px; }
+.offer-card-content p.title { color: var(--text-light); font-weight: 500; font-size: var(--fs-md); line-height: var(--lh-md); }
+.offer-card-content a.cta {
+  align-self: flex-start; border: 2px solid var(--text-light); border-radius: var(--rounded-small);
+  color: var(--text-light); font-weight: 700; font-size: var(--fs-sm); padding: 8px 16px; display: flex; align-items: center; gap: 6px;
+}
 
-/* ===================== CAROUSEL SECTIONS ===================== */
-.carousel-section { width: 1440px; background: var(--bg-bold-90); padding: 32px 100px; display: flex; flex-direction: column; align-items: center; gap: 24px; position: relative; }
-.carousel-section h2 { font-weight: 700; font-size: var(--fs-2xl); color: var(--text-light); }
-.carousel-track { display: flex; gap: 12px; width: 100%; overflow: hidden; }
-.carousel-card {
-  flex: 1; min-width: 0; border-radius: var(--rounded-standard); overflow: hidden;
-  background: var(--bg-bold-100); position: relative; min-height: 320px;
-  display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; color: #fff;
+/* ===================== WWT SG (fiber lookup) ===================== */
+.wwt-wrap { width: 1440px; background: var(--bg-light-100); padding: 16px 104px; }
+.wwt { background: var(--bg-ghost); border-radius: var(--rounded-standard); padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.wwt h2 { font-weight: 700; font-size: var(--fs-2xl); line-height: var(--lh-2xl); color: var(--text-bold-default); text-align: center; }
+.wwt-form { display: flex; gap: 16px; align-items: center; width: 100%; }
+.wwt-select, .wwt-input {
+  flex: 1; background: var(--bg-container); border: 2px solid var(--border-input); border-radius: var(--rounded-standard);
+  padding: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
-.carousel-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.85) 100%); }
-.carousel-card.p1 { background: linear-gradient(160deg, #cfd6dc, #8b95a0); }
-.carousel-card.p2 { background: linear-gradient(160deg, #3a3a3a, #101010); }
-.carousel-card.p3 { background: linear-gradient(160deg, #9fc9c2, #3c5b56); }
-.carousel-card.p4 { background: linear-gradient(160deg, #e9853f, #7a3113); }
-.carousel-card.p5 { background: linear-gradient(160deg, #6a4a7a, #23132c); }
-.carousel-badge { position: relative; z-index: 1; align-self: flex-start; background: var(--bg-ghost); color: var(--text-bold-default); font-weight: 700; font-size: var(--fs-xs); padding: 4px 10px; border-radius: var(--rounded-small); margin-bottom: auto; }
-.carousel-badge.dark { background: rgba(0,0,0,0.6); color: #fff; }
-.carousel-copy { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; }
-.carousel-copy h3 { font-weight: 700; font-size: var(--fs-base); line-height: var(--lh-base); }
-.carousel-copy .price-info { font-size: var(--fs-xs); opacity: 0.85; }
-.carousel-copy a.cta {
-  align-self: flex-start; background: #fff; color: var(--text-bold-default);
-  font-weight: 700; font-size: var(--fs-sm); padding: 8px 16px; border-radius: var(--rounded-small);
+.wwt-select.disabled, .wwt-input.disabled { background: var(--bg-ghost); }
+.wwt-select label, .wwt-input label { font-weight: 500; font-size: var(--fs-sm); color: var(--text-label); }
+.wwt-select label .req, .wwt-input label .req { color: var(--text-active); }
+.wwt-select img { width: 20px; height: 20px; }
+.wwt-input.small { flex: 0 0 160px; }
+.wwt-checkbox { display: flex; align-items: center; gap: 8px; width: 100%; }
+.wwt-checkbox .box { width: 24px; height: 24px; border: 2px solid var(--border-input); border-radius: var(--rounded-small); flex-shrink: 0; }
+.wwt-checkbox span { font-weight: 500; font-size: var(--fs-sm); color: var(--text-bold-default); }
+.wwt-note { display: flex; align-items: center; gap: 8px; font-size: var(--fs-sm); color: var(--text-bold-default); }
+.wwt-note a { text-decoration: underline; font-weight: 700; }
+
+/* ===================== TELEFONY I URZĄDZENIA ===================== */
+.phones-wrap { width: 1440px; background: var(--bg-light-100); padding: 16px 104px 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.phones-wrap h2 { color: var(--text-bold-default); font-weight: 700; font-size: var(--fs-lg); line-height: var(--lh-lg); text-align: center; }
+.phones-track { display: flex; gap: 16px; width: 100%; }
+.phone-card { flex: 1; min-width: 0; height: 450px; border-radius: var(--rounded-standard); background: var(--bg-bold-90); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 16px; color: #fff; }
+.phone-card .sticker {
+  align-self: flex-start; background: var(--bg-ghost); color: var(--text-bold-default);
+  font-weight: 700; font-size: var(--fs-xs); padding: 4px 10px; border-radius: var(--rounded-small); margin-bottom: 12px;
 }
-.carousel-arrow {
-  position: absolute; right: 40px; top: 50%; width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px;
+.phone-card h3 { font-weight: 700; font-size: var(--fs-lg); line-height: var(--lh-lg); padding-bottom: 8px; }
+.phone-card .desc { font-weight: 500; font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--text-bold-light-inv); }
+.phone-card img.product { flex: 1; width: 100%; object-fit: contain; margin: 8px 0; }
+.phone-card .price { font-size: var(--fs-sm); }
+.phone-card .price .amount { color: var(--text-active); font-weight: 700; }
+.phone-card .price .old { text-decoration: line-through; color: var(--text-bold-light-inv); }
+.phone-card .lowest { font-weight: 700; font-size: var(--fs-xs); color: var(--text-bold-light-inv); padding-bottom: 8px; }
+.phone-card .caption { font-weight: 500; font-size: var(--fs-sm); color: var(--text-bold-light-inv); padding-bottom: 8px; }
+.phone-card .cta {
+  align-self: flex-start; background: var(--bg-container); color: var(--text-bold-default);
+  font-weight: 700; font-size: var(--fs-sm); padding: 10px 20px; border-radius: var(--rounded-small);
 }
+.phones-indicator { width: 100%; height: 4px; background: var(--border-divider); border-radius: 4px; overflow: hidden; }
+.phones-indicator span { display: block; width: 82%; height: 100%; background: var(--bg-bold-90); }
 
 /* ===================== STREFA MAREK ===================== */
-.marki-section { width: 1440px; background: var(--bg-container); padding: 32px 100px; display: flex; gap: 16px; }
-.marka-btn { flex: 1; border: 2px solid var(--border-input); border-radius: var(--rounded-standard); padding: 24px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--fs-lg); color: var(--text-bold-default); }
-.marka-btn.link { justify-content: space-between; color: var(--text-active); }
+.marki-wrap { width: 1440px; background: var(--bg-bold-90); padding: 0 104px 16px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.marki-wrap h2 { color: var(--text-light); font-weight: 700; font-size: var(--fs-lg); line-height: var(--lh-lg); text-align: center; padding-top: 16px; }
+.marki-row { display: flex; gap: 16px; width: 100%; }
+.marka-btn { flex: 1; background: var(--bg-container); border: 2px solid var(--border-divider); border-radius: var(--rounded-standard); padding: 10px 18px; display: flex; align-items: center; justify-content: center; }
+.marka-btn img { height: 40px; width: auto; object-fit: contain; }
+.marka-link { flex: 1; background: var(--bg-container); border: 2px solid var(--border-divider); border-radius: var(--rounded-standard); padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: var(--fs-base); color: var(--text-bold-default); }
 
-/* ===================== TV PROMO ===================== */
-.tv-promo-section {
-  width: 1440px; padding: 32px 100px; display: flex; flex-direction: column; align-items: center; gap: 24px;
-  background: linear-gradient(120deg, #2a1c12, #120c08);
+/* ===================== TV ORANGE SECTION ===================== */
+.tv-orange-wrap { width: 1440px; background: var(--bg-bold-100); padding: 24px; display: flex; justify-content: center; }
+.tv-orange-container {
+  width: 100%; max-width: 1232px; min-width: 976px; position: relative;
+  border-radius: var(--rounded-big); overflow: hidden;
+  background: radial-gradient(120% 160% at 50% 0%, #2a1c12 0%, #150d08 60%, #0a0605 100%);
+  display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px 0;
 }
-.tv-promo-section h2 { font-weight: 700; font-size: var(--fs-2xl); color: var(--text-light); }
-.tv-tabs { display: flex; gap: 8px; }
-.tv-tab { background: rgba(255,255,255,0.1); color: var(--text-light); font-weight: 700; font-size: var(--fs-sm); padding: 8px 16px; border-radius: var(--rounded-full); }
-.tv-tab.active { background: var(--bg-brand); }
-.tv-cards { display: flex; gap: 12px; width: 100%; }
-.tv-card {
-  flex: 1; min-height: 280px; border-radius: var(--rounded-standard); overflow: hidden; position: relative;
-  display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; color: #fff;
+.tv-orange-container > * { position: relative; z-index: 1; }
+.tv-orange-container h2 { color: var(--text-light); font-weight: 700; font-size: var(--fs-4xl); line-height: var(--lh-4xl); text-align: center; }
+.tv-chips { display: flex; gap: 8px; }
+.tv-chip { background: rgba(255,255,255,0.12); color: var(--text-light); font-weight: 700; font-size: var(--fs-sm); padding: 8px 16px; border-radius: var(--rounded-full); }
+.tv-chip.active { background: var(--bg-container); color: var(--text-bold-default); }
+.tv-tiles { display: flex; gap: 16px; width: 100%; padding: 0 104px; overflow: hidden; }
+.tv-tile { flex: 1; min-width: 0; max-width: 400px; height: 370px; border-radius: var(--rounded-standard); overflow: hidden; }
+.tv-tile img { width: 100%; height: 100%; object-fit: cover; }
+.tv-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px;
+  border-radius: var(--rounded-standard); background: var(--bg-ghost); display: flex; align-items: center; justify-content: center;
+  color: var(--text-bold-default); font-size: 20px; z-index: 2;
 }
-.tv-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.85) 100%); }
-.tv-card.t1 { background: linear-gradient(160deg, #1a3a55, #08141f); }
-.tv-card.t2 { background: linear-gradient(160deg, #5a1414, #180404); }
-.tv-card.t3 { background: linear-gradient(160deg, #7a1420, #200508); }
-.tv-card.t4 { background: linear-gradient(160deg, #2a1a45, #0c0616); }
-.tv-card-copy { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 4px; }
-.tv-card .brand { font-weight: 900; font-size: var(--fs-lg); }
-.tv-card h3 { font-weight: 700; font-size: var(--fs-base); }
-.tv-card .sub { font-size: var(--fs-xs); opacity: 0.8; }
-.tv-cta { background: #fff; color: var(--text-bold-default); font-weight: 700; font-size: var(--fs-sm); padding: 10px 24px; border-radius: var(--rounded-small); }
-
-/* ===================== APP PROMO ===================== */
-.app-promo {
-  width: 1440px; padding: 48px 100px; display: flex; align-items: center; justify-content: space-between; gap: 40px;
-  background: linear-gradient(120deg, #000000 0%, #4a1e00 60%, #f15e00 130%);
+.tv-arrow.left { left: 24px; }
+.tv-arrow.right { right: 24px; }
+.tv-orange-container .btn-tertiary-sm {
+  background: transparent; border: 2px solid var(--text-light); color: var(--text-light);
+  font-weight: 700; font-size: var(--fs-sm); padding: 8px 24px; border-radius: var(--rounded-small);
 }
-.app-promo-copy { max-width: 480px; display: flex; flex-direction: column; gap: 16px; }
-.app-promo-copy h2 { color: var(--text-light); font-weight: 700; font-size: var(--fs-2xl); }
-.app-promo-copy ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.app-promo-copy li { color: var(--text-light); font-weight: 500; font-size: var(--fs-base); padding-left: 16px; position: relative; }
-.app-promo-copy li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--bg-brand); }
-.app-promo-visual { display: flex; align-items: center; gap: 24px; }
-.phone-mockup { width: 180px; height: 360px; border-radius: 24px; background: #111; border: 6px solid #222; box-shadow: var(--shadow-elevated); }
-.qr-box { width: 96px; height: 96px; background: #fff; border-radius: var(--rounded-small); display: flex; align-items: center; justify-content: center; color: var(--text-bold-default); font-size: 10px; text-align: center; }
 
-/* ===================== MORE SECTION ===================== */
-.more-section { width: 1440px; background: var(--bg-ghost); padding: 40px 100px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
-.more-section h2 { font-weight: 700; font-size: var(--fs-xl); color: var(--text-bold-default); }
-.more-section p { font-size: var(--fs-sm); color: var(--text-bold-light); max-width: 700px; }
-.btn-outline { border: 2px solid var(--border-bold); border-radius: var(--rounded-small); padding: 10px 24px; font-weight: 700; font-size: var(--fs-sm); color: var(--text-bold-default); }
-
-/* ===================== FOOTER ===================== */
-.footer { width: 1440px; background: var(--bg-bold-100); display: flex; flex-direction: column; gap: 16px; align-items: center; padding: 0 100px; overflow: hidden; }
-.footer-section { width: 100%; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; padding-top: 32px; padding-inline: 20px; }
-.footer-links { display: flex; align-items: flex-start; gap: 24px; flex-wrap: wrap; width: 100%; }
-.nav-links { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; white-space: nowrap; min-width: 150px; }
-.nav-links .head { font-weight: 700; font-size: var(--fs-sm); color: var(--text-bold-inverse); }
-.nav-links .item { font-weight: 500; font-size: var(--fs-xs); color: var(--text-placeholder); }
+/* ===================== FOOTER (shared with lp-tv.html) ===================== */
+.footer { width: 100%; background: var(--bg-bold-100); display: flex; flex-direction: column; gap: 16px; align-items: center; padding: 0 100px; overflow: hidden; }
+.footer-section { width: 100%; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; padding-top: 20px; padding-inline: 20px; }
+.footer-links { display: flex; align-items: flex-start; flex-wrap: wrap; }
+.nav-links { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; padding: 10px 20px 10px 0; white-space: nowrap; }
+.nav-links .head { font-weight: 700; font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--text-bold-inverse); }
+.nav-links .item { font-weight: 500; font-size: var(--fs-xs); line-height: var(--lh-xs); color: var(--text-placeholder); }
 .footer-section-mid { width: 100%; display: flex; flex-direction: column; gap: 16px; align-items: center; padding-inline: 20px; }
 .divider-dark { background: var(--bg-bold-90); height: 2px; width: 1240px; }
 .footer-row { width: 100%; display: flex; align-items: center; }
 .footer-quicklinks { flex: 1; display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
 .footer-link { display: flex; gap: 15px; align-items: center; }
 .footer-link .icon { width: 24px; height: 24px; color: var(--text-bold-inverse); }
-.footer-link span { font-weight: 700; font-size: var(--fs-base); color: var(--text-bold-inverse); white-space: nowrap; }
+.footer-link span { font-weight: 700; font-size: var(--fs-base); line-height: var(--lh-base); color: var(--text-bold-inverse); white-space: nowrap; }
 .socials { display: flex; gap: 16px; align-items: flex-start; justify-content: flex-end; }
 .social-circle { width: 40px; height: 40px; border-radius: 90px; border: 2px solid var(--text-bold-inverse); display: flex; align-items: center; justify-content: center; }
 .social-circle img, .social-circle .icon { width: 24px; height: 24px; color: var(--text-bold-inverse); }
 .footer-bottom { width: 100%; display: flex; flex-direction: column; gap: 32px; align-items: flex-start; padding: 0 20px 20px; }
 .legal-links { width: 100%; display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
 .legal-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.legal-item { font-weight: 500; font-size: var(--fs-xs); color: var(--text-placeholder); white-space: nowrap; padding-bottom: 6px; }
+.legal-item { font-weight: 500; font-size: var(--fs-xs); line-height: var(--lh-xs); color: var(--text-placeholder); white-space: nowrap; padding-bottom: 6px; }
 .legal-sep { width: 1px; height: 15px; background: var(--bg-bold-90); }
-.copyright { font-weight: 500; font-size: var(--fs-xs); color: var(--text-placeholder); white-space: nowrap; }
+.copyright { font-weight: 500; font-size: var(--fs-xs); line-height: var(--lh-xs); color: var(--text-placeholder); white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -309,243 +302,192 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
     <div class="menu-lower">
       <div class="services">
         <div class="logo-market"><img src="assets/content.svg" alt="Orange"></div>
-        <div class="service">
-          <span class="badge">Hot deal 🔥</span>
-          <span>Usługi komórkowe</span>
-          <img src="assets/arrow-down.svg" alt="">
-        </div>
-        <div class="service"><span>Internet</span><img src="assets/arrow-down.svg" alt=""></div>
-        <div class="service">
-          <span class="badge badge-new">Nowość</span>
-          <span>Telewizja</span>
-          <img src="assets/arrow-down.svg" alt="">
-        </div>
-        <div class="service"><span>Smartfony i urządzenia</span><img src="assets/arrow-down.svg" alt=""></div>
-        <div class="service"><span>Usługi i rozwiązania</span><img src="assets/arrow-down.svg" alt=""></div>
-        <div class="service"><span>Orange Market</span></div>
-        <div class="service"><span>Pomoc i kontakt</span><img src="assets/arrow-down.svg" alt=""></div>
+        <div class="service"><div class="uslugi"><span>Usługi komórkowe</span><img src="assets/arrow-down.svg" alt=""></div></div>
+        <div class="service"><div class="uslugi"><span>Internet</span><img src="assets/arrow-down.svg" alt=""></div></div>
+        <div class="service"><div class="uslugi"><span>Telewizja</span><img src="assets/arrow-down.svg" alt=""></div></div>
+        <div class="service"><div class="uslugi"><span>Smartfony i urządzenia</span><img src="assets/arrow-down.svg" alt=""></div></div>
+        <div class="service"><div class="uslugi"><span>Usługi i rozwiązania</span><img src="assets/arrow-down.svg" alt=""></div></div>
+        <div class="service"><div class="uslugi"><span>Pomoc i kontakt</span><img src="assets/arrow-down.svg" alt=""></div></div>
       </div>
-      <div class="menu-right">
-        <div class="menu-search">
+      <div class="right-side">
+        <div class="custom-item">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
           <span>Szukaj</span>
         </div>
+        <div class="custom-item">
+          <img class="cart" src="assets/koszyk.svg" alt="Koszyk">
+          <span>Koszyk</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- NOTICE STRIP -->
-  <div class="notice-strip">
-    Zwiększyliśmy zasięg światłowodu. <a href="#">Sprawdź oferty w Twojej lokalizacji.</a>
-  </div>
-
-  <!-- HERO -->
-  <div class="hero-home">
-    <div class="hero-list">
+  <!-- SG HEADER / HERO -->
+  <div class="sg-header">
+    <div class="shortcuts-box">
       <h3>Najczęściej wybierane</h3>
-      <a class="hero-list-item">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
-        Abonament komórkowy
-      </a>
-      <a class="hero-list-item">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8.5 15.5a6 6 0 0 1 7 0M12 19h.01"/></svg>
-        Światłowód – Hot deal 🔥
-      </a>
-      <a class="hero-list-item">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        Przedłuż abonament
-      </a>
-      <a class="hero-list-item">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
-        Smartfony na raty 0%
-      </a>
-      <a class="hero-list-item">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M3 9l9-6 9 6M4 10v10h16V10"/></svg>
-        Orange Market
-      </a>
+      <div class="shortcut-tiles">
+        <a class="shortcut-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
+          <span>Abonament komórkowy</span>
+        </a>
+        <a class="shortcut-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a11 11 0 0 1 14 0M8.5 15.5a6 6 0 0 1 7 0M12 19h.01"/></svg>
+          <span>Światłowód  - Hot deal 🔥</span>
+        </a>
+        <a class="shortcut-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
+          <span>Przedłuż abonament</span>
+        </a>
+        <a class="shortcut-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
+          <span>Smartfony na raty 0%</span>
+        </a>
+        <a class="shortcut-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M3 9l9-6 9 6M4 10v10h16V10"/></svg>
+          <span>Orange Market</span>
+        </a>
+      </div>
     </div>
 
-    <div class="hero-banner">
-      <div class="wordmark">iPhone 18<br>PRO</div>
-      <div class="hero-banner-copy">
-        <span class="tag">Przedsprzedaż</span>
-        <h2>iPhone 18 Pro. Pro bardziej.</h2>
-        <a class="btn btn-primary-small" href="#">Sprawdź</a>
+    <div class="hero-item-holder">
+      <div class="hero-banner">
+        <div class="hero-visual">
+          <img src="assets/hero-kv-mama.jpg" alt="">
+          <div class="top-label">Światłowód<br>+ TV 209 kanałów</div>
+          <div class="tak-o">Tak O!</div>
+        </div>
+        <div class="hero-content">
+          <h2>Trwa wyprzedaż w Orange</h2>
+          <div class="body">Sprawdź urządzenia w obniżonych cenach</div>
+          <a class="btn btn-primary-small" href="#">Zgarnij okazję</a>
+        </div>
       </div>
-      <div class="hero-arrow">›</div>
-      <div class="hero-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+      <div class="hero-arrow left">‹</div>
+      <div class="hero-arrow right">›</div>
+      <div class="hero-pagination"><span class="active"></span><span></span><span></span><span></span></div>
+      <div class="flag-badge"><img src="assets/due.svg" alt="DUE"></div>
     </div>
   </div>
 
-  <!-- WYBIERZ I KUP ONLINE -->
-  <div class="kup-online">
-    <h2>Wybierz i kup online</h2>
-    <div class="kup-cards">
-      <div class="kup-card c1">
-        <div class="kup-card-content">
-          <span class="price">25 zł/mies.</span>
-          <h3>Internet mobilny 5G z rabatem</h3>
-          <a class="cta" href="#">Sprawdź ›</a>
+  <!-- OFFER TEASERS -->
+  <div class="offer-teasers-wrap">
+    <div class="offer-teasers">
+      <h2>Odkryj wyjątkowe oferty</h2>
+      <div class="sub">Okazje dostępne tylko online</div>
+      <div class="offer-cards">
+        <div class="offer-card">
+          <img class="bg" src="assets/offer-router.jpg" alt="">
+          <div class="offer-card-content">
+            <p class="title">Światłowód bez umowy terminowej przez 1 mies. za darmo</p>
+            <a class="cta" href="#">Wypróbuj ›</a>
+          </div>
         </div>
-        <span class="fine">Sprawdź warunki promocji</span>
-      </div>
-      <div class="kup-card c2">
-        <div class="kup-card-content">
-          <h3>Ubezpieczenie szkolne - ochrona przez cały rok!</h3>
-          <a class="cta" href="#">Sprawdź ›</a>
+        <div class="offer-card">
+          <img class="bg" src="assets/offer-student.jpg" alt="">
+          <div class="offer-card-content">
+            <p class="title">Kolejne numery do 50% taniej</p>
+            <a class="cta" href="#">Sprawdź ›</a>
+          </div>
         </div>
-        <span class="fine">Sprawdź warunki promocji</span>
-      </div>
-      <div class="kup-card c3">
-        <div class="kup-card-content">
-          <span class="price">12 za 0 zł</span>
-          <h3>Światłowód na koniec lata Tak O!</h3>
-          <a class="cta" href="#">Sprawdź ›</a>
+        <div class="offer-card">
+          <img class="bg" src="assets/offer-autodoladowanie.jpg" alt="">
+          <div class="offer-card-content">
+            <p class="title">Bonus 3×10 zł za Autodoładowanie w Orange na kartę</p>
+            <a class="cta" href="#">Sprawdź ›</a>
+          </div>
         </div>
-        <span class="fine">Sprawdź warunki promocji</span>
-      </div>
-      <div class="kup-card c4">
-        <div class="kup-card-content">
-          <span class="price">od 59 zł/mies.</span>
-          <h3>Hit cenowy Na dobry początek Tak O!</h3>
-          <a class="cta" href="#">Sprawdź ›</a>
+        <div class="offer-card">
+          <img class="bg" src="assets/offer-hitcenowy.png" alt="">
+          <div class="offer-card-content">
+            <p class="title">Hit Cenowy na dobry początek</p>
+            <a class="cta" href="#">Sprawdź ›</a>
+          </div>
         </div>
-        <span class="fine">Abonament and smartfon</span>
       </div>
     </div>
   </div>
 
-  <!-- FIBER FORM -->
-  <div class="fiber-form-section">
-    <h2>Poznaj ofertę światłowodu w Twojej lokalizacji</h2>
-    <div class="fiber-form">
-      <select><option>Miejscowość*</option></select>
-      <select><option>Ulica*</option></select>
-      <input type="text" placeholder="Nr domu*">
-      <input type="text" placeholder="Nr lokalu">
-      <a class="btn btn-primary-small" href="#">Pokaż oferty</a>
+  <!-- FIBER LOOKUP -->
+  <div class="wwt-wrap">
+    <div class="wwt">
+      <h2>Poznaj ofertę internetu w lokalizacji Twojej firmy</h2>
+      <div class="wwt-form">
+        <div class="wwt-select"><label>Miejscowość<span class="req">*</span></label><img src="assets/arrow-down.svg" alt=""></div>
+        <div class="wwt-select disabled"><label>Ulica<span class="req">*</span></label><img src="assets/arrow-down.svg" alt=""></div>
+        <div class="wwt-input small disabled"><label>Nr domu<span class="req">*</span></label></div>
+        <div class="wwt-input small disabled"><label>Nr lokalu</label></div>
+        <a class="btn btn-primary" href="#">Pokaż oferty</a>
+      </div>
+      <label class="wwt-checkbox"><div class="box"></div><span>W mojej miejscowości nie ma ulicy</span></label>
+      <p class="wwt-note">🛡️ <a href="#">Przetwarzanie danych osobowych</a>, w tym adresu, służy jedynie do dopasowania oferty.</p>
     </div>
-    <label class="fiber-form-check"><input type="checkbox"> W mojej miejscowości nie ma ulicy</label>
-    <p class="fiber-form-note">🔒 <a href="#">Przetwarzanie danych osobowych</a>, w tym adresem, służy jedynie do dopasowania oferty.</p>
   </div>
 
   <!-- TELEFONY I URZĄDZENIA -->
-  <div class="carousel-section">
+  <div class="phones-wrap">
     <h2>Telefony i urządzenia</h2>
-    <div class="carousel-track">
-      <div class="carousel-card p1">
-        <span class="carousel-badge">Premiera</span>
-        <div class="carousel-copy">
-          <h3>Poznaj serię Redmi Note 17 z prezentami z okazji premiery</h3>
-          <a class="cta" href="#">Sprawdź</a>
-        </div>
+    <div class="phones-track">
+      <div class="phone-card">
+        <span class="sticker">Okazja tygodnia!</span>
+        <h3>W ratach 0% już od 69,42 zł miesięcznie</h3>
+        <div class="caption">Samsung Galaxy S24 FE 5G 8/128 GB</div>
+        <a class="cta" href="#">Sprawdź</a>
       </div>
-      <div class="carousel-card p2">
-        <span class="carousel-badge">Przedsprzedaż</span>
-        <div class="carousel-copy">
-          <h3>Poznaj nowe smartwatche Apple</h3>
-          <div class="price-info">Dostępne w ratach 0%.</div>
-          <a class="cta" href="#">Sprawdź</a>
-        </div>
+      <div class="phone-card">
+        <span class="sticker">Megatanio</span>
+        <h3>Tylko 432 zł za smartfon motorola moto g05</h3>
+        <div class="desc">W ratach 0% już od 12 zł miesięcznie.</div>
+        <div class="caption" style="margin-top:auto;">Motorola moto g05 8/128 GB<br><span style="color:var(--text-active);font-weight:700;">432 zł</span> <span style="text-decoration:line-through;">576 zł</span><br>Najniższa cena w okresie 30 dni przed obniżką: 548 zł</div>
+        <a class="cta" href="#">Sprawdź</a>
       </div>
-      <div class="carousel-card p3">
-        <span class="carousel-badge">Premiera</span>
-        <div class="carousel-copy">
-          <h3>Kup najnowszy Galaxy S26 FE z benefitami na start</h3>
-          <a class="cta" href="#">Sprawdź</a>
-        </div>
+      <div class="phone-card">
+        <span class="sticker">Premiera</span>
+        <h3>Kup najnowszy Galaxy S25 FE i odbierz smartwatch Galaxy Watch7</h3>
+        <a class="cta" href="#">Sprawdź</a>
       </div>
-      <div class="carousel-card p4">
-        <span class="carousel-badge dark">Oferta z abonamentem</span>
-        <div class="carousel-copy">
-          <h3>Bestsellerowe iPhone'y taniej nawet o 648 zł</h3>
-          <div class="price-info">iPhone 17 Pro Max 256GB 5G — Nowa cena: 5843 zł</div>
-          <a class="cta" href="#">Sprawdź</a>
-        </div>
-      </div>
-      <div class="carousel-card p5">
-        <span class="carousel-badge dark">Oferta z abonamentem</span>
-        <div class="carousel-copy">
-          <h3>Kup najnowsze Galaxy z serii Z</h3>
-          <div class="price-info">z 2x większą pamięcią w cenie mniejszej</div>
-          <a class="cta" href="#">Sprawdź</a>
-        </div>
+      <div class="phone-card">
+        <span class="sticker">Nowość</span>
+        <h3>Kup wybrany tablet z serii Galaxy Tab S11 i otrzymaj etui z klawiaturą</h3>
+        <div class="desc">Zyskaj dodatkowo nawet 2300 zł w Programie Odkup.</div>
+        <a class="cta" href="#">Sprawdź</a>
       </div>
     </div>
-    <div class="carousel-arrow">›</div>
+    <div class="phones-indicator"><span></span></div>
   </div>
 
   <!-- STREFA MAREK -->
-  <div class="marki-section">
-    <div class="marka-btn">SAMSUNG</div>
-    <div class="marka-btn"></div>
-    <div class="marka-btn">xiaomi</div>
-    <a class="marka-btn link" href="#">Przejdź do sklepu ›</a>
-  </div>
-
-  <!-- TELEWIZJA OD ORANGE PROMO -->
-  <div class="tv-promo-section">
-    <h2>Telewizja od Orange</h2>
-    <div class="tv-tabs">
-      <div class="tv-tab active">ze światłowodem</div>
-      <div class="tv-tab">z internetem mobilnym 5G</div>
-      <div class="tv-tab">ze światłowodem i abonamentem</div>
-    </div>
-    <div class="tv-cards">
-      <div class="tv-card t1">
-        <div class="tv-card-copy">
-          <h3>Odblokuj pełną moc 230 kanałów TV</h3>
-          <div class="sub">Amazon Prime odbierz w prezencie</div>
-        </div>
-      </div>
-      <div class="tv-card t2">
-        <div class="tv-card-copy">
-          <div class="brand">NETFLIX</div>
-          <h3>Żalka</h3>
-          <div class="sub">16 września</div>
-        </div>
-      </div>
-      <div class="tv-card t3">
-        <div class="tv-card-copy">
-          <div class="brand">HBO max</div>
-          <h3>Klara. Rewolucja.</h3>
-          <div class="sub">Oglądaj teraz</div>
-        </div>
-      </div>
-      <div class="tv-card t4">
-        <div class="tv-card-copy">
-          <div class="brand">prime</div>
-          <h3>Reacher</h3>
-          <div class="sub">Nowy sezon — oglądaj teraz</div>
-        </div>
-      </div>
-    </div>
-    <a class="tv-cta" href="lp-tv.html">Sprawdź</a>
-    <div class="carousel-arrow">›</div>
-  </div>
-
-  <!-- APLIKACJA MÓJ ORANGE -->
-  <div class="app-promo">
-    <div class="app-promo-copy">
-      <h2>Aplikacja Mój Orange</h2>
-      <ul>
-        <li>Pełna kontrola nad kontem i usługami.</li>
-        <li>Dostęp do atrakcyjnych ofert i prezentów.</li>
-        <li>Możliwość zarządzania domowym Wi-Fi.</li>
-      </ul>
-      <a class="btn btn-primary-small" href="#">Pobierz aplikację</a>
-    </div>
-    <div class="app-promo-visual">
-      <div class="phone-mockup"></div>
-      <div class="qr-box">Zeskanuj<br>kod QR</div>
+  <div class="marki-wrap">
+    <h2>Strefa marek</h2>
+    <div class="marki-row">
+      <div class="marka-btn"><img src="assets/brand-samsung.png" alt="Samsung"></div>
+      <div class="marka-btn"><img src="assets/brand-apple.png" alt="Apple"></div>
+      <div class="marka-btn"><img src="assets/brand-xiaomi.png" alt="Xiaomi"></div>
+      <a class="marka-link" href="#">Przejdź do sklepu ›</a>
     </div>
   </div>
 
-  <!-- MORE -->
-  <div class="more-section">
-    <h2>W Orange dostajesz więcej!</h2>
-    <p>Jesteśmy liderem w dostarczaniu usług telekomunikacyjnych, które codziennie towarzyszą milionom naszych klientów...</p>
-    <a class="btn-outline" href="#">Więcej</a>
+  <!-- TELEWIZJA OD ORANGE -->
+  <div class="tv-orange-wrap">
+    <div class="tv-orange-container">
+      <h2>Telewizja od Orange</h2>
+      <div class="tv-chips">
+        <div class="tv-chip active">ze światłowodem</div>
+        <div class="tv-chip">z Internetem mobilnym 5G</div>
+        <div class="tv-chip">ze światłowodem i abonamentem</div>
+        <a class="tv-chip" href="lp-tv.html">Telewizja Standalone</a>
+      </div>
+      <div style="position:relative; width:100%; display:flex; justify-content:center;">
+        <div class="tv-arrow left">‹</div>
+        <div class="tv-tiles">
+          <div class="tv-tile"><img src="assets/tv-card-1.png" alt="Odblokuj pełną moc 230 kanałów TV"></div>
+          <div class="tv-tile"><img src="assets/tv-card-2.png" alt="Ród smoka - HBO"></div>
+          <div class="tv-tile"><img src="assets/tv-card-3.png" alt="Alfa"></div>
+        </div>
+        <div class="tv-arrow right">›</div>
+      </div>
+      <a class="btn-tertiary-sm" href="lp-tv.html">Sprawdź</a>
+    </div>
   </div>
 
   <!-- FOOTER -->
@@ -553,33 +495,12 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
     <div class="footer-section">
       <div class="footer-links">
         <div class="nav-links">
-          <div class="head">Abonament</div>
-          <div class="item">Nowy numer</div>
+          <div class="head">Oferta</div>
           <div class="item">Przedłuż umowę</div>
           <div class="item">Przenieś numer</div>
-          <div class="item">Przejdź z karty</div>
-          <div class="item">Przejdź z NJU do Orange</div>
-          <div class="item">Oferta dla firm</div>
-        </div>
-        <div class="nav-links">
-          <div class="head">Internet</div>
-          <div class="item">Światłowód</div>
-          <div class="item">Internet mobilny 5G</div>
-          <div class="item">Światłowód i Telewizja</div>
-          <div class="item">Przedłuż umowę na internet</div>
-          <div class="item">Klaklowód</div>
-        </div>
-        <div class="nav-links">
-          <div class="head">Telewizja</div>
-          <div class="item">Telewizja od Orange</div>
-          <div class="item">Telewizja i Światłowód</div>
-          <div class="item">Telewizja z abonamentem i internetem</div>
-          <div class="item">Przedłuż umowę na telewizję</div>
-        </div>
-        <div class="nav-links">
-          <div class="head">Usługi łączone</div>
-          <div class="item">Regulaminy i cenniki</div>
-          <div class="item">Przedłuż umowę na pakiet usług</div>
+          <div class="item">Internet</div>
+          <div class="item">Orange Flex</div>
+          <div class="item">Offers for foreigners</div>
         </div>
         <div class="nav-links">
           <div class="head">Na skróty</div>
@@ -587,7 +508,6 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
           <div class="item">Roaming i połączenia międzynarodowe</div>
           <div class="item">Poradnik Orange</div>
           <div class="item">Status urządzenia na raty</div>
-          <div class="item">Mapa zasięgu</div>
         </div>
         <div class="nav-links">
           <div class="head">Serwisy</div>
@@ -645,24 +565,26 @@ button { font-family: inherit; border: none; background: none; cursor: pointer; 
           <span class="legal-item">Regulamin serwisu</span><div class="legal-sep"></div>
           <span class="legal-item">Warunki zakupów</span><div class="legal-sep"></div>
           <span class="legal-item">Ochrona danych osobowych</span><div class="legal-sep"></div>
-          <span class="legal-item">Polityka AI</span><div class="legal-sep"></div>
           <span class="legal-item">Polityka prywatności</span><div class="legal-sep"></div>
-          <span class="legal-item">Zmień ustawienia cookies</span><div class="legal-sep"></div>
-          <span class="legal-item">Akt o usługach cyfrowych</span>
+          <span class="legal-item">Zgłoś niebezpieczne treści</span><div class="legal-sep"></div>
+          <span class="legal-item">Sieć#1</span><div class="legal-sep"></div>
+          <span class="legal-item">Inwestycje dofinansowane z UE</span><div class="legal-sep"></div>
+          <span class="legal-item">Nieruchomości Orange</span>
         </div>
         <div class="legal-row">
-          <span class="legal-item">Zgłoś niebezpieczne treści</span><div class="legal-sep"></div>
-          <span class="legal-item">Znajdź firmy z Fortune Energetycznej</span><div class="legal-sep"></div>
-          <span class="legal-item">Nieruchomości Orange</span><div class="legal-sep"></div>
-          <span class="legal-item">Dokumenty źródeł mocy</span><div class="legal-sep"></div>
+          <span class="legal-item">Multibox</span><div class="legal-sep"></div>
+          <span class="legal-item">Odpowiedzialny biznes</span><div class="legal-sep"></div>
+          <span class="legal-item">Fundacja Orange</span><div class="legal-sep"></div>
+          <span class="legal-item">Telefon domowy</span><div class="legal-sep"></div>
           <span class="legal-item">Dbam o bliskich</span><div class="legal-sep"></div>
           <span class="legal-item">Razem dla planety</span><div class="legal-sep"></div>
+          <span class="legal-item">Razem w sieci</span><div class="legal-sep"></div>
           <span class="legal-item">Program Re</span><div class="legal-sep"></div>
           <span class="legal-item">Tłumacz języka migowego</span><div class="legal-sep"></div>
           <span class="legal-item">Confort+</span>
         </div>
       </div>
-      <p class="copyright">© 2026 Orange Polska S.A. Wszystkie prawa zastrzeżone.</p>
+      <p class="copyright">© 2022 Orange Polska S.A. Wszystkie prawa zastrzeżone.</p>
     </div>
   </div>
 
